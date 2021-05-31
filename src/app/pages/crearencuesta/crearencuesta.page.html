@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home">Inicio</ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+ <ion-card-content>
+   <ion-card>
+     <div align="center">DATOS DE LA ENCUESTA</div>
+     <ion-grid>
+      <ion-row>
+        <ion-col>
+         <ion-item *ngIf="encuesta" position="stacked">
+           <ion-input required  type="text" placeholder="Titulo de la encuesta" [(ngModel)]="encuesta.titulo" ></ion-input>
+         </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item  *ngIf="encuesta">
+            <ion-label position="floating">MM/DD/YYYY</ion-label>
+            <ion-datetime displayFormat="MM/DD/YYYY" min="2020-01-01" max="2050-12-31" [(ngModel)]="encuesta.fecha_inicio" ></ion-datetime>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+       <ion-col>
+        <ion-item *ngIf="encuesta" position="stacked">
+          <ion-input type="text" placeholder="Descripción" [(ngModel)]="encuesta.descripcion" ></ion-input>
+        </ion-item>
+       </ion-col>
+       <ion-col>
+        <ion-item *ngIf="encuesta">
+          <ion-label position="floating">MM/DD/YYYY</ion-label>
+          <ion-datetime displayFormat="MM/DD/YYYY" min="2020-01-01" max="2050-12-31" [(ngModel)]="encuesta.fecha_final" ></ion-datetime>
+        </ion-item>
+       </ion-col>
+     </ion-row>
+     <ion-row>
+      <ion-col>
+        <ion-item *ngIf="encuesta">
+          <ion-label>Estado</ion-label>
+          <ion-toggle checked="true" [(ngModel)]="encuesta.estado" ></ion-toggle>
+        </ion-item>
+        </ion-col>
+    </ion-row>
+    </ion-grid>
+   </ion-card>
+   <div align="center"><ion-button  size="large" shape="round" (click)="crearEncuesta()" >Siguiente</ion-button></div>
+ </ion-card-content>
+</ion-content>

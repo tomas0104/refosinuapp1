@@ -1,6 +1,6 @@
 #container {
   text-align: center;
-
+  background-color: #444444;
   position: absolute;
   left: 0;
   right: 0;
@@ -14,7 +14,7 @@
 }
 
 #container p {
-  font-size: 16px;
+  font-size: 30px;
   line-height: 22px;
 
   color: #8c8c8c;
@@ -25,3 +25,14 @@
 #container a {
   text-decoration: none;
 }
+
+
+ion-content{ --ion-background-color:#444444; }
+
+ion-button{ --background:#ff7000;
+            --padding-bottom: 1cm;
+            --padding-top:1cm;
+            --padding-start: 2cm;
+            --padding-end: 2cm;
+             font-style: bold;
+          }

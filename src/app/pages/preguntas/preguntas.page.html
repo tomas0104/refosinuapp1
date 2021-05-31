@@ -1,0 +1,143 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-back-button defaultHref="home">Inicio</ion-back-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+ <ion-card-content>
+   <ion-card>
+    <ion-list>
+      <ion-list-header>
+        <ion-label>
+          Lista de selección
+        </ion-label>
+      </ion-list-header>
+      
+     <ion-item>
+        <ion-label>Encuestas</ion-label>
+        <ion-select [(ngModel)]="pre.idencuesta" placeholder="Seleccione una encuesta">
+          <ion-item *ngFor="let encuesta of encuestas">
+            <ion-select-option value ="{{encuesta.id}}">{{encuesta.titulo}}</ion-select-option>
+          </ion-item>
+        </ion-select>
+      </ion-item>
+      <br>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="8">
+            <ion-item >
+              <ion-label>Tipo de pregunta</ion-label>
+              <ion-select name="tipop" [(ngModel)]="pre.tipop" placeholder="Seleccione un tipo de pregunta">
+                <ion-select-option value ="1">Abierta</ion-select-option>
+                <ion-select-option value ="2">Cerrada</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col size="4">
+            <ion-button >Guardar encuesta</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+   </ion-card>
+ </ion-card-content>
+  <ion-card-content>
+    <ion-card>
+      <div *ngIf="pre.tipop == 1 ; then thenBlock"> </div>
+    <ng-template #thenBlock>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="8">
+            <ion-item >
+              <ion-input type="text" name="pregunta1" [(ngModel)]="pre.pregunta1" placeholder="Pregunta" ></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="4">
+           <ion-button (click)="saveTodo()">Añadir pregunta</ion-button>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item > <ion-input required  type="text" [(ngModel)]="pre.respuesta1"  placeholder="Respuesta 1" ></ion-input></ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item > <ion-input required  type="text" [(ngModel)]="pre.respuesta2" placeholder="Respuesta 2" ></ion-input></ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item > <ion-input type="text" [(ngModel)]="pre.respuesta3" placeholder="Respuesta 3" ></ion-input></ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item > <ion-input type="text" [(ngModel)]="pre.respuesta4" placeholder="Respuesta 4" ></ion-input></ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ng-template>
+    <div *ngIf="pre.tipop == 2 ; then thenBlock1"> </div>
+    <ng-template #thenBlock1>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="8">
+            <ion-item>
+              <ion-input type="text" placeholder="Pregunta" ></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="4">
+           <ion-button>Añadir pregunta</ion-button>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-label>Si</ion-label>
+          </ion-col>
+          <ion-col>
+            <ion-label>No</ion-label>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ng-template>
+    <div *ngIf="pre.tipop == '' ; then vacio"> </div>
+    <ng-template #vacio>
+    <ion-label>Selecciona un tipo pregunta</ion-label>
+    </ng-template>
+    </ion-card>
+  </ion-card-content>
+  
+    <ion-card-content>
+      <ion-card *ngFor="let pregunta of preguntasencuesta">
+        <div>
+          <ion-grid>
+          <div >
+            <div align="left">
+              <ion-button  color="danger" (click)="onRemoveTodo(pregunta.id)"><ion-icon name="trash"></ion-icon></ion-button>
+            </div>
+              <ion-row>
+                <ion-col>
+                  <ion-item>{{pregunta.pregunta1}}</ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-item>{{pregunta.respuesta1}}</ion-item>
+                </ion-col>
+                <ion-col>
+                 <ion-item> {{pregunta.respuesta2}}</ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                 <ion-item> {{pregunta.respuesta3}}</ion-item>
+                </ion-col>
+                <ion-col>
+                 <ion-item> {{pregunta.respuesta4}}</ion-item>
+                </ion-col>
+              </ion-row>
+            </div>
+          </ion-grid>
+        </div>
+      </ion-card>
+    </ion-card-content>
+
+</ion-content>
