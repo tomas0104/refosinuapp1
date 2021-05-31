@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceTodoService } from '../../services/service-todo.service';
 import { encuesta } from '../../models/encuesta.interface';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-encuestas',
@@ -10,8 +11,9 @@ import { encuesta } from '../../models/encuesta.interface';
 export class EncuestasPage implements OnInit {
 
   encuestas: encuesta[];
-
-  constructor(private todoService: ServiceTodoService) { }
+  id = null;
+  constructor(private todoService: ServiceTodoService,
+              public alertController: AlertController) { }
 
   ngOnInit() {
     this.todoService.getEncuestas().subscribe((todos) =>{
@@ -20,8 +22,30 @@ export class EncuestasPage implements OnInit {
     })
   }
 
-  eliminar(id:string){
-    this.todoService.removeEncuesta(id);
+  async eliminar(id:string) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Confirmar!',
+      message: 'Estas seguro de eliminar esta encuesta!!!',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Si',
+          handler: () => {
+            console.log('Confirm Okay');
+            this.todoService.removeEncuesta(id);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
 }
